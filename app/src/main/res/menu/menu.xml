@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/action_main"
+        android:orderInCategory="100"
+        android:title="主界面"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_shengciben"
+        android:orderInCategory="100"
+        android:title="生词本"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_chazhao"
+        android:orderInCategory="100"
+        android:title="查找"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_help"
+        android:orderInCategory="100"
+        android:title="帮助"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_back"
+        android:orderInCategory="100"
+        android:title="退出"
+        app:showAsAction="never"
+        />
+
+
+
+
+
+
+
+</menu>

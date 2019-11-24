@@ -3,63 +3,42 @@ package com.example.vocabularybook;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
-    private final static String DATABASE_NAME = "vocabularydb";//数据库名字
-    private final static int DATABASE_VERSION = 1;//数据库版本
+    //创建stu表的语句
+    public static final String CREATE_BOOK = "create table words(" +
+            "id integer primary key autoincrement," +
+            "word text," +
+            "meaning text," +
+            "example text)" ;
 
-    public MyDatabaseHelper (Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    private Context context;
+    public MyDatabaseHelper(Context context) {
+        super(context, "wordsDB", null, 1);
+        this.context = context;
     }
 
-    //建表SQL
-    private final static String SQL_CREATE_DATABASE = "CREATE TABLE "
-            + words.TABLE_NAME
-            + " ("
-            +words.WORD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            +words.WORD_NAME + " TEXT" + ","
-            + words.WORD_MEANING + " TEXT" + ","
-            + words.WORD_SAMPLE + " TEXT" + " )";
-
-    private final static String SQL_DELETE_DATABASE = "DROP TABLE IF EXISTS " + words.TABLE_NAME;
-
-
-
-    @Override    public void onCreate(SQLiteDatabase db) {
-        //创建数据库
-        db.execSQL(SQL_CREATE_DATABASE);
+    public MyDatabaseHelper(@Nullable MainActivity context, int version) {
+        super(context, "words.db", null, version);
     }
 
-    @Override    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //当数据库升级时被调用，首先删除旧表，然后调用OnCreate()创建新表
-        db.execSQL(SQL_DELETE_DATABASE);
-        onCreate(db);
+    @Override
+    //参数的dbOperator是操作数据库的对象
+    public void onCreate(SQLiteDatabase dbOperator) {
+        //创建数据库
+        dbOperator.execSQL(CREATE_BOOK);
+        Toast.makeText(context,"Create successful", Toast.LENGTH_SHORT).show();
+    }
+
+    //当传入的版本号大于当前数据库的版本号时调用
+    //用于更新数据库
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.d("TAG", "onUpgrade: ");
     }
 }
-
-
-
-
-//    public static final String CREATE_VOCABULARY ="create table vovabulary ("
-//            +"id integer primary key "
-//            +"name String"
-//            +"yinbiao String"
-//            +"lijuyw String"
-//            +"lijuzw String";
-//
-//    private Context mContext;
-//    public MyDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory,int version){
-//        super(context,name,factory,version);
-//        mContext=context;
-//    }
-//
-//    public  void onCreate(SQLiteDatabase db){
-//        db.execSQL(CREATE_VOCABULARY);
-//    }
-//
-//    @Override
-//    public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion) {
-//
-//    }

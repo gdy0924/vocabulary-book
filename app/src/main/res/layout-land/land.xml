@@ -7,18 +7,17 @@
     tools:context=".MainActivity">
 
     <fragment
-        class="com.example.vocabularybook.LeftFragment"
-        android:id="@+id/words_left"
+        android:id="@+id/fragment"
+        android:name="com.example.vocabularybook.LeftFragment"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
 
     <fragment
-        android:id="@+id/word_right"
-        class="com.example.vocabularybook.FragmentRight"
+        android:id="@+id/fragment2"
+        android:name="com.example.vocabularybook.RightFragment"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="2" />
-
 
 </LinearLayout>
