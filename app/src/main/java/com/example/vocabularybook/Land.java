@@ -83,6 +83,10 @@ public class Land extends AppCompatActivity {
                 final TextView showWord = (TextView) findViewById(R.id.wordShow_land);
                 final TextView showMeaning = (TextView) findViewById(R.id.meaningShow_land);
                 final TextView showExample = (TextView) findViewById(R.id.exampleShow_land);
+                final TextView textView2=(TextView)findViewById(R.id.textView2) ;
+                final TextView textView3=(TextView)findViewById(R.id.textView3) ;
+                textView2.setText("   释义");
+                textView3.setText("   例句");
                 showWord.setText(words[position].getWord());
                 showMeaning.setText(words[position].getMeaning());
                 showExample.setText(words[position].getExample());

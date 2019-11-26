@@ -5,11 +5,23 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.Map;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.provider.UserDictionary;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class DB_operator {
 
     private MyDatabaseHelper dbHelper;
     private String TAG = "MainActivity";
+    ArrayList<Map<String, String>> ConvertCursor2WordList;
 
     public void insert(Words word){
 
@@ -52,5 +64,37 @@ public class DB_operator {
         }
         cursor.close();
 
+    }
+
+
+    public ArrayList<Map<String, String>> SearchUseSql(String strWordSearch) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String sql = "select * from words where word like ? order by word desc";
+        Cursor c = db.rawQuery(sql, new String[]{"%" + strWordSearch + "%"});
+
+        return ConvertCursor2WordList;
+    }
+
+    public void UpdateUseSql(String strId, String strWord, String strMeaning, String strSample) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String sql = "update words set word=?,meaning=?,sample=? where _id=?";
+        db.execSQL(sql, new String[]{strWord,strMeaning, strSample, strId});
+    }
+
+    public void DeleteUseSql(String strId) {
+        String sql = "delete from words where _id='" + strId + "'";
+
+        //Gets the data repository in write mode*/
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        db.execSQL(sql);
+    }
+
+    public void InsertUserSql(String strWord, String strMeaning, String strSample) {
+        String sql = "insert into  words(_id,word,meaning,sample) values(?,?,?,?)";
+
+        //Gets the data repository in write mode*/
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.execSQL(sql, new String[]{strWord, strMeaning, strSample});
     }
 }

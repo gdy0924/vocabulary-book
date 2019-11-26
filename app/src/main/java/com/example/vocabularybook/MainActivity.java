@@ -21,6 +21,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -113,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
         myListView = (ListView)findViewById(R.id.wordList);
         //Log.d("wordList:", adapter.getItem(0));
         myListView.setAdapter(adapter);
-        //Log.d("", "成功！！！！！！！！！！！！！！！！！！！！");
         //点击查看&修改
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -172,123 +172,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showWord(final int position){
-        Intent intent = new Intent(MainActivity.this, SCBook.class);
+        Intent intent = new Intent(MainActivity.this, ShowWords.class);
         Bundle bundleSimple = new Bundle();
         bundleSimple.putString("word", words[position].getWord());
         bundleSimple.putString("meaning", words[position].getMeaning());
         bundleSimple.putString("example", words[position].getExample());
         intent.putExtras(bundleSimple);
         startActivity(intent);
-//        setContentView(R.layout.word_show);
-//        final TextView wordShow = (TextView) findViewById(R.id.wordShow);
-//        final TextView meaningShow = (TextView)findViewById(R.id.meaningShow);
-//        final TextView exampleShow = (TextView)findViewById(R.id.exampleShow);
-//
-//        //接受传参
-//        wordShow.setText(words[position].getWord());
-//        meaningShow.setText(words[position].getMeaning());
-//        exampleShow.setText(words[position].getExample());
-//
-//        //点击弹出修改提示框modify_builder
-//        Button modify = (Button)findViewById(R.id.modify);
-//        modify.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                AlertDialog.Builder modify_builder = new AlertDialog.Builder(MainActivity.this);
-//                final LayoutInflater inflater1 = getLayoutInflater();
-//                final View modify_view = inflater1.inflate(R.layout.edit_words, null);
-//                modify_builder.setView(modify_view).setTitle("修改单词").setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        EditText editMeaning = modify_view.findViewById(R.id.editMeaning);
-//                        EditText editExample = modify_view.findViewById(R.id.editExample);
-//
-//                        String newMeaning = editMeaning.getText().toString();
-//                        String newExample = editExample.getText().toString();
-//                        Log.d("newMeaning:", newMeaning);
-//                        Log.d("newExample:", newExample);
-//
-//                        if(newMeaning != "" && newExample != ""){
-//                            meaningShow.setText(newMeaning);
-//                            exampleShow.setText(newExample);
-//                            afterMeaning = newMeaning;
-//                            afterExample = newExample;
-//                        }
-//
-//
-//
-//                    }
-//
-//                }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                    }
-//                });
-//                modify_builder.show();
-//
-//            }
-//
-//        });
-//
-//        Button collect = (Button)findViewById(R.id.collect);
-//        collect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //传递些简单的参数
-//                Intent intent1 = new Intent();
-//                intent1.setClass(MainActivity.this,WordBook.class);
-//
-//                //intent1.putExtra("usr", "lyx");
-//                //intent1.putExtra("pwd", "123456");
-//                //startActivity(intent1);
-//
-//                Bundle bundleSimple = new Bundle();
-//                bundleSimple.putString("word", words[position].getWord());
-//                bundleSimple.putString("meaning", words[position].getMeaning());
-//                bundleSimple.putString("example", words[position].getExample());
-//                intent1.putExtras(bundleSimple);
-//
-//                startActivity(intent1);
-//
-//            }
-//        });
-//
-//        Button back = (Button)findViewById(R.id.back);
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("afterMeaning:", afterMeaning);
-//                Log.d("afterExample:", afterExample);
-//
-//                if(afterMeaning == "" && afterExample == ""){
-//                    setContentView(R.layout.activity_main);
-//                    ClickList(words);
-//                }else{
-//                    words[position].setMeaning(afterMeaning);
-//                    words[position].setExample(afterExample);
-//                    list.set(position, words[position]);
-//                    words = list.getData();
-//                    for(int i = 0; i < words.length; i++){
-//                        if(words[i] == null)
-//                            break;
-//                        Log.d("after!!!:", words[i].getWord());
-//                        Log.d("after!!!:", words[i].getMeaning());
-//                        Log.d("after!!!:", words[i].getExample());
-//
-//                    }
-//                    setContentView(R.layout.activity_main);
-//                    ClickList(words);
-//                    addWords();
-//                    }
-//
-//                }
-//
-//
-//            });
     }
 
-    ImageButton imageButton;
+    Button imageButton;
 
     public void addWords(){
         //添加按钮事件
